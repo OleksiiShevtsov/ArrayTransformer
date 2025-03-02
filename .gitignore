@@ -47,3 +47,6 @@ CMakeUserPresets.json
 *.vs/
 *.out/
 
+# Project
+lib/
+
