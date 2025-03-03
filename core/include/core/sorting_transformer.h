@@ -11,26 +11,27 @@ namespace at
         Container transform(const Container& input) override
         {
             Container sorted = input;
-            for (auto it = sorted.begin(); it != sorted.end(); ++it)
+            auto end = sorted.end();
+            for (auto iter = sorted.begin(); iter != end; ++iter)
             {
-                sort(it->begin(), it->end());
+                sort(iter->begin(), iter->end());
             }
             return sorted;
         }
 
     private:
         template <typename Iterator>
-        void sort(Iterator first, Iterator last)
+        void sort(Iterator begin, Iterator end)
         {
             bool swapped;
-            for (auto i = first; i != last; ++i)
+            for (auto iterI = begin; iterI != end; ++iterI)
             {
                 swapped = false;
-                for (auto j = first; j < last - 1 - (i - first); ++j)
+                for (auto iterJ = begin; iterJ < end - 1 - (iterI - begin); ++iterJ)
                 {
-                    if (*j > *(j + 1))
+                    if (*iterJ > *(iterJ + 1))
                     {
-                        swap(*j, *(j + 1));
+                        swap(*iterJ, *(iterJ + 1));
                         swapped = true;
                     }
                 }

@@ -44,15 +44,16 @@ namespace at
 
         void reverseSort(typename Container::value_type& input)
         {
-            for (auto firstIterator = input.begin(); firstIterator != input.end(); ++firstIterator)
+            auto end = input.end();
+            for (auto iterI = input.begin(); iterI != end; ++iterI)
             {
-                for (auto secondIterator = input.begin(); secondIterator != firstIterator; ++secondIterator)
+                for (auto iterJ = input.begin(); iterJ != iterI; ++iterJ)
                 {
-                    if (*firstIterator > *secondIterator)
+                    if (*iterI > *iterJ)
                     {
-                        auto tempIterator = *firstIterator;
-                        *firstIterator = *secondIterator;
-                        *secondIterator = tempIterator;
+                        auto tempIterator = *iterI;
+                        *iterI = *iterJ;
+                        *iterJ = tempIterator;
                     }
                 }
             }

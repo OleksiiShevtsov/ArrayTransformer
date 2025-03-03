@@ -16,39 +16,41 @@ namespace at
 
             manualSortArrays(sortedArrays);
 
-            typename Container::value_type intersectionTwo = findIntersection(
+            typename Container::value_type intersectionTwoBig = findIntersection(
                 sortedArrays.begin()->begin(), sortedArrays.begin()->end(),
                 (sortedArrays.begin() + 1)->begin(), (sortedArrays.begin() + 1)->end()
             );
 
             typename Container::value_type intersectionAll = *sortedArrays.begin();
-            for (auto iterator = sortedArrays.begin(); iterator != sortedArrays.end(); ++iterator)
+            auto end = sortedArrays.end();
+            for (auto iter = sortedArrays.begin(); iter != end; ++iter)
             {
                 intersectionAll = findIntersection(
                     intersectionAll.begin(), intersectionAll.end(),
-                    iterator->begin(), iterator->end()
+                    iter->begin(), iter->end()
                 );
             }
 
             Container intersection;
-            intersection.insert(intersection.end(), intersectionTwo);
+            intersection.insert(intersection.end(), intersectionTwoBig);
             intersection.insert(intersection.end(), intersectionAll);
 
             return intersection;
         }
     private:
 
-        void manualSortArrays(Container& arrays)
+        void manualSortArrays(Container& input)
         {
-            for (auto iteratorFirst = arrays.begin(); iteratorFirst != arrays.end(); ++iteratorFirst)
+            auto end = input.end();
+            for (auto iterI = input.begin(); iterI != end; ++iterI)
             {
-                for (auto iteratorSecond = arrays.begin(); iteratorSecond != iteratorFirst; ++iteratorSecond)
+                for (auto iterJ = input.begin(); iterJ != iterI; ++iterJ)
                 {
-                    if (iteratorFirst->size() > iteratorSecond->size())
+                    if (iterI->size() > iterJ->size())
                     {
-                        auto tempIterator = *iteratorFirst;
-                        *iteratorFirst = *iteratorSecond;
-                        *iteratorSecond = tempIterator;
+                        auto tempIterator = *iterI;
+                        *iterI = *iterJ;
+                        *iterJ = tempIterator;
                     }
                 }
             }
